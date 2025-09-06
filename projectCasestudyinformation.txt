@@ -1,0 +1,10 @@
+CASE STUDY—FULL-STACK AI DEVELOPER
+Deadline: Friday, 05 Sept 2025, 23:59 (Dubai/GST). Earlier submissions are welcome.
+Desired Output: A fully vibe-coded, functional AI-native RCM platform for GCC, ready to demo.
+Steps:
+1. Align with our vision: Visit our website (humaein.com) to internalize the vision, problem, and solution space.
+2. Learn RCM first principles: Use public sources (videos, articles) to grasp RCM and why it’s challenging in GCC.
+3. Study case studies of AI-native startups transforming Legacy services: e.g., Harvey and Legora for Law, Aegis Health, Egress Health, Epic, and Innovaccer for healthcare
+4. Build a reimagined workflow: Vibe-code a functional AI-native RCM platform of the future
+Note: Traditional RCM involves the following high-level steps (rolled up, not exhaustive)
+Eligibility → Prior-auth approval → Clinical documentation → Medical coding → Claims scrubbing → Claims submission → Remittance tracking → Denial management → Claims resubmission → Remittance tracking → Reconciliation.
