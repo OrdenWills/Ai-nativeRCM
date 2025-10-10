@@ -194,7 +194,7 @@ def analyze_prior_auth_request(data):
     
     # Use real Gemini AI service for prior authorization analysis
     try:
-        ai_analysis = ai_service.analyze_prior_authorization(data)
+        ai_analysis = ai_service.analyze_prior_auth_request(data)
         
         if 'error' not in ai_analysis:
             return {

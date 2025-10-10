@@ -69,3 +69,7 @@ Unit tests
 Integration tests
 API documentation
 User documentation
+
+#### 
+make patient id-case insensitive.
+Add search to patient management.
