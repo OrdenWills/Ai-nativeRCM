@@ -1,0 +1,116 @@
+A.
+Patient scheduling & reminders
+Real-time sync with doctor and clinic calendars (EMR, Google, Outlook)
+
+Automatic capture of patient related data
+
+WhatsApp/SMS/email reminders driven by AI
+
+Personalized follow-up prompts for missed
+
+Auto rescheduling for last-minute changes or cancellations
+
+B.
+Insurance eligibility & medical billing
+Instant e-eligibility and benefits checks
+
+Flags policy limits, exclusions, and network coverage
+
+Real-time estimate of patient share (co-pay, deductible, co-insurance)
+
+Automated payment posting and invoicing
+
+Smart reminders for outstanding balances
+
+C.
+Prior authorization management
+Auto-detection of services needing prior auth
+
+One-click e-submission with auto-attachment
+
+Auto-filling of Payor forms using copilot
+
+Live approval status and triggers for scope expansion
+
+Auto escalation and resubmission on delays or denials
+
+D.
+Medical coding & claims scrubbing
+Coding validation as per UAE & AIPC / AHIMA guidelines
+
+AI-powered coding suggestion
+
+Auto triggers to treating doctors
+
+Pre-submission checks for common errors
+
+Coding audit with improvement plan
+
+E.
+Electronic claims submission
+One-click eClaims and DHPO submission
+
+Gateway validation prevents data or format errors
+
+Auto-attachment of required documents
+
+Unified view for initial claims status, and resubmissions
+
+F.
+Denial management & resubmission
+Auto-review of denial codes and root causes
+
+Auto-drafts medical justifications from EMR/HIS notes
+
+Auto-triggers to treating physician for needed input
+
+Auto-prioritization of high value denial
+
+Resubmission automation with attachments and comments
+
+G.
+Payor denial reconciliation
+Denial‐by‐payor reporting with actionable insights
+
+Auto-drafts for reconciliation based on payor-contracts
+
+Performance scorecards to support data-driven negotiations
+
+Trend dashboard by payor, clinic, and specialty
+
+Expert-suggestions for workflow fixes to cut future denial
+
+H.
+Remittance processing & bank settlement
+Auto-detection of Remittance gap between DHPO and bank statements
+
+Flags unpaid, under-paid, or unmatched claims for follow-up
+
+Negotiation assist to release held / under-paid remittances
+
+Cash-flow tracker links claim status to settlement date
+
+Bulk download of payor remittance for audit compliance
+
+I.
+Real-time end-to-end cashflow reporting
+Doctor-wise, insurance-wise, and specialty-wise revenue analytics
+
+TAT analytics to show bottlenecks pre- and post-submission
+
+Doctor-wise revenue share reports (as per % in agreement)
+
+Root-cause analyses of revenue leakage (SOP and coding gaps)
+
+Live dashboard of pending claims, payments, and delay in resubmission
+J.
+Payor-Provider negotiation
+KPI dashboard with benchmarks on denial rate, TAT & payor compliance
+
+AI-drafts for negotiation on tariff and write-offs
+
+Performance alerts flagging variance vs. agreed metrics
+
+Secure document vault and e-signature for contracts
+
+Timely compliance and quality reports for both payors and providers
