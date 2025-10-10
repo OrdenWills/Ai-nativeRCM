@@ -81,7 +81,7 @@ def submit_prior_auth():
             'provider': data.get('provider'),
             'facility': data.get('facility'),
             'status': 'pending',
-            'submitted_date': datetime.datetime.now().strftime('%Y-%m-%d'),
+            'submitted_date': datetime.now().strftime('%Y-%m-%d'),  # FIXED: was datetime.datetime.now()
             'decision_date': None,
             'estimated_cost': data.get('estimated_cost', 0),
             'ai_analysis': ai_analysis,
@@ -99,7 +99,8 @@ def submit_prior_auth():
         }), 201
         
     except Exception as e:
-        return jsonify({'error': 'Failed to submit prior authorization'}), 500
+        print(f"Submit Prior Auth Error: {str(e)}")  # Added error logging
+        return jsonify({'error': f'Failed to submit prior authorization: {str(e)}'}), 500
 
 @prior_auth_bp.route('/upload/<auth_id>', methods=['POST'])
 def upload_document(auth_id):
@@ -180,7 +181,7 @@ def update_auth_status(auth_id):
         
         PRIOR_AUTH_DB[auth_id]['status'] = new_status
         if new_status in ['approved', 'denied']:
-            PRIOR_AUTH_DB[auth_id]['decision_date'] = datetime.datetime.now().strftime('%Y-%m-%d')
+            PRIOR_AUTH_DB[auth_id]['decision_date'] = datetime.now().strftime('%Y-%m-%d')  # FIXED
         
         return jsonify({
             'message': 'Status updated successfully',
@@ -197,15 +198,39 @@ def analyze_prior_auth_request(data):
     try:
         ai_analysis = ai_service.analyze_prior_auth_request(data)
         
+        # Handle case where AI returns a list instead of dict
+        if isinstance(ai_analysis, list):
+            if len(ai_analysis) > 0:
+                ai_analysis = ai_analysis[0]  # Take first element
+            else:
+                raise ValueError("AI returned empty list")
+        
         if 'error' not in ai_analysis:
+            # Map AI response fields to expected format
+            # Handle both possible field name variations
+            approval_likelihood = ai_analysis.get('approval_likelihood_score', 
+                                                 ai_analysis.get('approval_likelihood', 85))
+            
+            # Convert 0-1 score to 0-100 percentage if needed
+            if isinstance(approval_likelihood, float) and approval_likelihood <= 1:
+                approval_likelihood = int(approval_likelihood * 100)
+            
             return {
-                'approval_likelihood': ai_analysis.get('approval_likelihood', 85),
-                'risk_factors': ai_analysis.get('risk_factors', []),
-                'recommendations': ai_analysis.get('recommendations', []),
-                'confidence_score': ai_analysis.get('confidence_score', 0.85)
+                'approval_likelihood': approval_likelihood,
+                'risk_factors': ai_analysis.get('potential_approval_barriers', 
+                                               ai_analysis.get('risk_factors', [])),
+                'recommendations': ai_analysis.get('recommendations_for_strengthening_the_request',
+                                                  ai_analysis.get('recommendations', [])),
+                'confidence_score': ai_analysis.get('confidence_score', 0.85),
+                'required_documents': ai_analysis.get('required_documentation_checklist',
+                                                     ai_analysis.get('required_docs', [])),
+                'timeline': ai_analysis.get('expected_processing_timeline',
+                                          ai_analysis.get('timeline', '5-7 business days'))
             }
     except Exception as ai_error:
         print(f"AI Prior Auth Analysis Error: {ai_error}")
+        import traceback
+        traceback.print_exc()  # Print full stack trace for debugging
     
     # Fallback to mock analysis if AI fails
     procedure = data.get('procedure', '').lower()
@@ -220,10 +245,15 @@ def analyze_prior_auth_request(data):
     if 'surgery' in procedure or 'operation' in procedure:
         approval_likelihood -= 10
         recommendations.append('Detailed surgical plan required')
-        ai_analysis['recommendations'].extend(['Include referral reason', 'Primary care notes'])
-        ai_analysis['required_documents'].extend(['referral_letter.pdf'])
+        recommendations.extend(['Include referral reason', 'Primary care notes'])
+        risk_factors.append('Complex surgical procedure')
     
-    return ai_analysis
+    return {
+        'approval_likelihood': approval_likelihood,
+        'risk_factors': risk_factors,
+        'recommendations': recommendations,
+        'confidence_score': 0.75
+    }
 
 def analyze_documents(auth_record):
     """AI-powered document analysis"""

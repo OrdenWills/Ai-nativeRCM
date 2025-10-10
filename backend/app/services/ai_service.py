@@ -47,6 +47,7 @@ class GeminiAIService:
                 contents=contents,
                 config=config
             )
+            print(type(response.text.strip()))
             
             return response.text.strip()
         except Exception as e:
@@ -264,14 +265,17 @@ class GeminiAIService:
         Clinical Justification: {request_data.get('clinical_justification', '')}
         Payer: {request_data.get('payer', '')}
         
-        Provide:
-        1. Approval likelihood score (0-1)
-        2. Required documentation checklist
-        3. Potential approval barriers
-        4. Recommendations for strengthening the request
-        5. Expected processing timeline
-        
-        Return as JSON format.
+Provide analysis in this EXACT JSON format:
+{{
+    "approval_likelihood": <number 0-100>,
+    "risk_factors": [<array of strings>],
+    "recommendations": [<array of strings>],
+    "confidence_score": <number 0-1>,
+    "required_docs": [<array of strings>],
+    "timeline": "<string>"
+}}
+
+Return ONLY valid JSON, no additional text.
         """
         
         response = self._make_request(prompt, system_prompt)
