@@ -219,10 +219,10 @@ def analyze_prior_auth_request(data):
     if 'surgery' in procedure or 'operation' in procedure:
         approval_likelihood -= 10
         recommendations.append('Detailed surgical plan required')
-        analysis['recommendations'].extend(['Include referral reason', 'Primary care notes'])
-        analysis['required_documents'].extend(['referral_letter.pdf'])
+        ai_analysis['recommendations'].extend(['Include referral reason', 'Primary care notes'])
+        ai_analysis['required_documents'].extend(['referral_letter.pdf'])
     
-    return analysis
+    return ai_analysis
 
 def analyze_documents(auth_record):
     """AI-powered document analysis"""
